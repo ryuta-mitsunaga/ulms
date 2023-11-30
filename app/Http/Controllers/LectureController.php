@@ -2,12 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Login\Requests\LoginRequest;
+use App\Http\Requests\RegisterStudentLectureRequest;
 use App\UseCase\Lecture\UseCases\GetLectureListUseCase;
-use App\UseCase\Login\UseCases\LoginUseCase;
-use App\UseCase\Login\UseCases\LogoutUseCase;
+use App\UseCase\Lecture\UseCases\RegisterStudentLectureUseCase;
 use Illuminate\Routing\Controller as BaseController;
-use Illuminate\Support\Facades\Log;
 
 class LectureController extends BaseController
 {
@@ -15,4 +13,10 @@ class LectureController extends BaseController
     {
         return $get_lecture_list_use_case();
     }
+
+    public function registerStudentLecture(RegisterStudentLectureRequest $register_student_lecture_request, RegisterStudentLectureUseCase $register_student_lecture_use_case, $student_id, $lecture_id)
+    {
+        return $register_student_lecture_use_case($register_student_lecture_request, (int)$student_id, (int)$lecture_id);
+    }
+
 }

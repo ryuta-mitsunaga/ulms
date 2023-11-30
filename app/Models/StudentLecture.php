@@ -14,5 +14,7 @@ class StudentLecture extends Model
     protected $fillable = [
         'student_id',
         'lecture_id',
+        'register_date',
+        'period',
     ];
 }

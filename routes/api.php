@@ -26,3 +26,5 @@ Route::middleware('auth:sanctum')->post('/logout', [LoginController::class, 'log
 Route::middleware('auth:sanctum')->get('/index', [LoginController::class, 'index'])->name('login');
 
 Route::get('/lectureList', [LectureController::class, 'getLectureList']);
+
+Route::post('/student/{student_id}/lecture/{lecture_id}', [LectureController::class, 'registerStudentLecture']);

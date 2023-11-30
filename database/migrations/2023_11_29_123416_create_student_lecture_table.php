@@ -14,6 +14,8 @@ return new class () extends Migration {
             $table->id();
             $table->foreignId('student_id');
             $table->foreignId('lecture_id');
+            $table->date('register_date');
+            $table->integer('period');
 
             $table->timestamps();
             $table->softDeletes();
