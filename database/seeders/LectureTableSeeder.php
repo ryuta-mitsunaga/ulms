@@ -27,12 +27,14 @@ class LectureTableSeeder extends Seeder
             DB::table('lecture')->insert([
                 'lecture_type' => rand(1, 3),
                 'title' => $lecture,
-                'description' => Str::random(50),
+                'description' => '講義の説明文が入ります。講義の説明文が入ります。講義の説明文が入ります。講義の説明文が入ります。講義の説明文が入ります。講義の説明文が入ります。講義の説明文が入ります。講義の説明文が入ります。講義の説明文が入ります。講義の説明文が入ります。',
                 'mon_period' => rand(0, 1) ? json_encode(range(1, 5)) : null,
                 'tue_period' => rand(0, 1) ? json_encode(range(1, 5)) : null,
                 'wed_period' => rand(0, 1) ? json_encode(range(1, 5)) : null,
                 'thu_period' => rand(0, 1) ? json_encode(range(1, 5)) : null,
                 'fri_period' => rand(0, 1) ? json_encode(range(1, 5)) : null,
+                'sat_period' => rand(0, 1) ? json_encode(range(1, 5)) : null,
+                'sun_period' => rand(0, 1) ? json_encode(range(1, 5)) : null,
                 'created_at' => now(),
                 'updated_at' => now()
             ]);

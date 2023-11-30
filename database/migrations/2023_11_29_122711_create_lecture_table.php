@@ -20,6 +20,8 @@ return new class () extends Migration {
             $table->json('wed_period')->nullable()->comment('[1, 2, 3, 4, 5]');
             $table->json('thu_period')->nullable()->comment('[1, 2, 3, 4, 5]');
             $table->json('fri_period')->nullable()->comment('[1, 2, 3, 4, 5]');
+            $table->json('sat_period')->nullable()->comment('[1, 2, 3, 4, 5]');
+            $table->json('sun_period')->nullable()->comment('[1, 2, 3, 4, 5]');
 
             $table->timestamps();
             $table->softDeletes();

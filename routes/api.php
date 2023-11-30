@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\LectureController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\UlmsController;
 use Illuminate\Http\Request;
@@ -23,3 +24,5 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 Route::post('/login', [LoginController::class, 'login']);
 Route::middleware('auth:sanctum')->post('/logout', [LoginController::class, 'logout']);
 Route::middleware('auth:sanctum')->get('/index', [LoginController::class, 'index'])->name('login');
+
+Route::get('/lectureList', [LectureController::class, 'getLectureList']);
