@@ -1,20 +1,23 @@
-###############
-# php-fpm(ptx-app)
-###############
+FROM php:8.2-fpm
+COPY php.ini /usr/local/etc/php/
 
-FROM eeis.jp:5005/eam/php-expt/php82-master AS ptx-app
+RUN apt-get update \
+  && apt-get install -y zlib1g-dev mariadb-client vim libzip-dev \
+  && docker-php-ext-install zip pdo_mysql
 
-ENV COMPOSER_ALLOW_SUPERUSER=1 \
-    COMPOSER_HOME=/composer
+#Composer install
+RUN php -r "copy('https://getcomposer.org/installer', 'composer-setup.php');"
+RUN php composer-setup.php
+RUN php -r "unlink('composer-setup.php');"
+RUN mv composer.phar /usr/local/bin/composer
 
-COPY --from=composer:2.5.8 /usr/bin/composer /usr/bin/composer
+ENV COMPOSER_ALLOW_SUPERUSER 1
 
-RUN apk add git && \
-    composer config -g process-timeout 3600 && \
-    composer config -g repos.packagist composer https://packagist.org
+ENV COMPOSER_HOME /composer
 
-ADD ./app /work/app
+ENV PATH $PATH:/composer/vendor/bin
 
-RUN cd /work/app && composer install --optimize-autoloader --no-dev
 
-WORKDIR /work/app
+WORKDIR /var/www
+
+RUN composer global require "laravel/installer"

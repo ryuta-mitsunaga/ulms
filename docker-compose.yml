@@ -1,42 +1,56 @@
 version: '3'
 services:
-  l10dev-nginx:
-    container_name: "l10dev-nginx"
+  ulms-nginx:
+    container_name: "ulms-nginx"
     build:
       context: ./docker/nginx
     depends_on:
-      - l10dev-app
+      - ulms-app
     ports:
       - 80:80
     volumes:
       - ./:/src
 
-  l10dev-app:
-    container_name: "l10dev-app"
+  ulms-app:
+    container_name: "ulms-app"
     build:
       context: ./docker/php
     depends_on:
-      - l10dev-mysql
+      - ulms-db
     volumes:
       - ./:/src
       - /src/node_modules
       - /src/vendor
       - ./docker/php/php.ini:/usr/local/etc/php/php.ini
 
-  l10dev-mysql:
+  ulms-db:
     image: mysql:8.0.33
     command: --max_allowed_packet=32505856
-    container_name: "l10dev-mysql"
+    container_name: "ulms-db"
     volumes:
       - ./docker/mysql:/var/lib/mysql
     environment:
       - MYSQL_ROOT_PASSWORD=root
-      - MYSQL_DATABASE=l10dev
+      - MYSQL_DATABASE=ulms_db
     ports:
       - 3306:3306
 
-  l10dev-redis:
+  ulms-redis:
     image: redis:alpine
-    container_name: "l10dev-redis"
+    container_name: "ulms-redis"
     ports:
       - 16379:6379
+      
+  phpmyadmin:
+    container_name: phpmyadmin_container
+    image: phpmyadmin/phpmyadmin
+    environment: [
+      "PMA_ARBITRARY=1", 
+      "PMA_HOST=ulms-db",
+      "PMA_USER=root",
+      "PMA_PASSWORD=root"
+    ]
+    ports:
+      - 3000:80
+    volumes:
+      - ./phpadmin/sessions:/sessions
