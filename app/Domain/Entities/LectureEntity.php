@@ -72,4 +72,21 @@ class LectureEntity
     {
         return $this->sun_period;
     }
+
+    public function toArray(): array
+    {
+        return [
+            'id' => $this->id,
+            'lectureType' => $this->lecture_type,
+            'title' => $this->title,
+            'description' => $this->description,
+            'monPeriod' => $this->mon_period,
+            'tuePeriod' => $this->tue_period,
+            'wedPeriod' => $this->wed_period,
+            'thuPeriod' => $this->thu_period,
+            'friPeriod' => $this->fri_period,
+            'satPeriod' => $this->sat_period,
+            'sunPeriod' => $this->sun_period,
+        ];
+    }
 }

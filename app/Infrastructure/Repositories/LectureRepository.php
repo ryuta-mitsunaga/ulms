@@ -5,6 +5,7 @@ namespace App\Infrastructure\Repositories;
 use App\Domain\Entities\LectureEntityList;
 use App\Domain\Repositories\LectureRepositoryInterface;
 use App\Models\Lecture;
+use App\Models\StudentLecture;
 
 class LectureRepository implements LectureRepositoryInterface
 {

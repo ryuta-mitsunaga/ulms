@@ -2,12 +2,9 @@
 
 namespace App\Infrastructure\Repositories;
 
-use App\Domain\Entities\LectureEntityList;
-use App\Domain\Repositories\LectureRepositoryInterface;
 use App\Domain\Repositories\StudentLectureRepositoryInterface;
-use App\Models\Lecture;
 use App\Models\StudentLecture;
-use Carbon\Carbon;
+use App\UseCase\DTO\StudentLectureListDTO;
 
 class StudentLectureRepository implements StudentLectureRepositoryInterface
 {
@@ -20,5 +17,21 @@ class StudentLectureRepository implements StudentLectureRepositoryInterface
             'period' => $period,
         ]);
 
+    }
+
+    public function getLectureListByStudentId(int $student_id): StudentLectureListDTO
+    {
+        $student_lecture_model_list = StudentLecture::query()
+            ->where('student_id', $student_id)
+            ->get();
+
+        $student_lecture_list_dto = new StudentLectureListDTO();
+
+        $student_lecture_model_list->each(function ($student_lecture_model) use ($student_lecture_list_dto) {
+            /** @var StudentLecture $student_lecture_model */
+            $student_lecture_list_dto->append($student_lecture_model->toDTO());
+        });
+
+        return $student_lecture_list_dto;
     }
 }

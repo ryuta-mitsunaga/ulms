@@ -27,19 +27,7 @@ class GetLectureListUseCase extends BaseController
 
         /** @var LectureEntity $lecture_entity */
         foreach ($lecture_entity_list as $lecture_entity) {
-            $response_array[] =   [
-                'id' => $lecture_entity->getId(),
-                'lectureType' => $lecture_entity->getLectureType(),
-                'title' => $lecture_entity->getTitle(),
-                'description' => $lecture_entity->getDescription(),
-                'monPeriod' => $lecture_entity->getMonPeriod(),
-                'tuePeriod' => $lecture_entity->getTuePeriod(),
-                'wedPeriod' => $lecture_entity->getWedPeriod(),
-                'thuPeriod' => $lecture_entity->getThuPeriod(),
-                'friPeriod' => $lecture_entity->getFriPeriod(),
-                'satPeriod' => $lecture_entity->getSatPeriod(),
-                'sunPeriod' => $lecture_entity->getSunPeriod(),
-            ];
+            $response_array[] = $lecture_entity->toArray();
         }
 
         return response()->json($response_array);
