@@ -6,6 +6,7 @@ use App\Http\Requests\RegisterStudentLectureRequest;
 use App\UseCase\Lecture\UseCases\GetLectureListUseCase;
 use App\UseCase\Lecture\UseCases\GetStudentLectureListUseCase;
 use App\UseCase\Lecture\UseCases\RegisterStudentLectureUseCase;
+use App\UseCase\Lecture\UseCases\RemoveStudentLectureUseCase;
 use Illuminate\Routing\Controller as BaseController;
 
 class LectureController extends BaseController
@@ -25,4 +26,8 @@ class LectureController extends BaseController
         return $register_student_lecture_use_case($register_student_lecture_request, (int)$student_id, (int)$lecture_id);
     }
 
+    public function removeStudentLecture(RemoveStudentLectureUseCase $register_student_lecture_use_case, $student_lecture_id)
+    {
+        return $register_student_lecture_use_case((int)$student_lecture_id);
+    }
 }

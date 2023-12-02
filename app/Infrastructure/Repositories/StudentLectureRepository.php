@@ -2,6 +2,7 @@
 
 namespace App\Infrastructure\Repositories;
 
+use App\Domain\Entities\StudentLectureEntity;
 use App\Domain\Repositories\StudentLectureRepositoryInterface;
 use App\Models\StudentLecture;
 use App\UseCase\DTO\StudentLectureListDTO;
@@ -33,5 +34,25 @@ class StudentLectureRepository implements StudentLectureRepositoryInterface
         });
 
         return $student_lecture_list_dto;
+    }
+
+    public function findByStudentIdAndLectureInfo(int $student_id, string $register_date, $period): ?StudentLectureEntity
+    {
+        $student_lecture_model = StudentLecture::query()
+            ->where([
+                ['student_id', $student_id],
+                ['register_date', $register_date],
+                ['period', $period],
+            ])
+            ->first();
+
+        return $student_lecture_model?->toEntity();
+    }
+
+    public function remove(int $student_lecture_id): void
+    {
+        StudentLecture::query()
+            ->where('id', $student_lecture_id)
+            ->delete();
     }
 }

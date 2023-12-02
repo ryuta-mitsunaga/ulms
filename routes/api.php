@@ -30,3 +30,4 @@ Route::get('/lectureList', [LectureController::class, 'getLectureList']);
 Route::get('/student/{student_id}/lecture', [LectureController::class, 'getStudentLectureList']);
 
 Route::post('/student/{student_id}/lecture/{lecture_id}', [LectureController::class, 'registerStudentLecture']);
+Route::delete('/studentLecture/{student_lecture_id}', [LectureController::class, 'removeStudentLecture']);

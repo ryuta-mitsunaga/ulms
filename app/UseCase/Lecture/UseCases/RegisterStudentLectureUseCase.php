@@ -11,6 +11,7 @@ use Illuminate\Auth\AuthManager;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Routing\Controller as BaseController;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Log;
 
 class RegisterStudentLectureUseCase extends BaseController
 {
@@ -29,6 +30,13 @@ class RegisterStudentLectureUseCase extends BaseController
         $period = $register_student_lecture_request->period;
 
         try {
+            $student_lecture_entity = $this->student_lecture_repository->findByStudentIdAndLectureInfo($student_id, $register_date, $period);
+
+            // 登録対象の時間に講義登録されている場合は登録済みの講義を削除する
+            if ($student_lecture_entity) {
+                $this->student_lecture_repository->remove($student_lecture_entity->getId());
+            }
+
             $this->student_lecture_repository->add($register_date, $student_id, $lecture_id, $period);
 
             DB::commit();
