@@ -14,10 +14,10 @@ class GetStudentLectureListUseCase extends BaseController
     ) {}
 
     public function __invoke(
-        int $student_id,
+        int $term_type
     ): JsonResponse {
-
-        $student_lecture_list_dto = $this->student_lecture_repository->getLectureListByStudentId($student_id);
+        $student_id = auth()->id();
+        $student_lecture_list_dto = $this->student_lecture_repository->getLectureListByStudentId($student_id, $term_type);
 
         $response_array = [];
 

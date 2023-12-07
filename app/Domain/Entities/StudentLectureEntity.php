@@ -8,8 +8,9 @@ class StudentLectureEntity
         private int $id,
         private int $student_id,
         private int $lecture_id,
-        private string $register_date,
-        private int $period,
+        private ?string $register_date,
+        private ?int $period,
+        private ?int $term_type
     ) {}
 
     public function getId(): int
@@ -27,12 +28,17 @@ class StudentLectureEntity
         return $this->lecture_id;
     }
 
-    public function getRegisterDate(): string
+    public function getTermType(): ?int
+    {
+        return $this->term_type;
+    }
+
+    public function getRegisterDate(): ?string
     {
         return $this->register_date;
     }
 
-    public function getPeriod(): int
+    public function getPeriod(): ?int
     {
         return $this->period;
     }
@@ -45,6 +51,7 @@ class StudentLectureEntity
             'lectureId' => $this->lecture_id,
             'registerDate' => $this->register_date,
             'period' => $this->period,
+            'termType' => $this->term_type,
         ];
     }
 }

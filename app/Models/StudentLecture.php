@@ -21,6 +21,7 @@ class StudentLecture extends Model
         'lecture_id',
         'register_date',
         'period',
+        'term_type',
     ];
 
     public function student(): BelongsTo
@@ -41,6 +42,7 @@ class StudentLecture extends Model
             $this->lecture_id,
             $this->register_date,
             $this->period,
+            $this->term_type
         );
     }
 

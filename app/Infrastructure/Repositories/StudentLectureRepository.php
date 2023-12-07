@@ -20,10 +20,12 @@ class StudentLectureRepository implements StudentLectureRepositoryInterface
 
     }
 
-    public function getLectureListByStudentId(int $student_id): StudentLectureListDTO
+    public function getLectureListByStudentId(int $student_id, int $term_type): StudentLectureListDTO
     {
         $student_lecture_model_list = StudentLecture::query()
             ->where('student_id', $student_id)
+            ->where('term_type', $term_type)
+
             ->get();
 
         $student_lecture_list_dto = new StudentLectureListDTO();
@@ -49,10 +51,32 @@ class StudentLectureRepository implements StudentLectureRepositoryInterface
         return $student_lecture_model?->toEntity();
     }
 
+    public function findByStudentIdAndLectureIdAndTermType(int $student_id, int $lecture_id, int $term_type): ?StudentLectureEntity
+    {
+        $student_lecture_model = StudentLecture::query()
+            ->where([
+                ['student_id', $student_id],
+                ['lecture_id', $lecture_id],
+                ['term_type', $term_type],
+            ])
+            ->first();
+
+        return $student_lecture_model?->toEntity();
+    }
+
     public function remove(int $student_lecture_id): void
     {
         StudentLecture::query()
             ->where('id', $student_lecture_id)
             ->delete();
+    }
+
+    public function addForTerm(int $student_id, int $lecture_id, int $term_type): void
+    {
+        StudentLecture::query()->create([
+            'student_id' => $student_id,
+            'lecture_id' => $lecture_id,
+            'term_type' => $term_type,
+        ]);
     }
 }

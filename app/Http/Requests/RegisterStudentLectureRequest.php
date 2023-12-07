@@ -9,8 +9,8 @@ class RegisterStudentLectureRequest extends FormRequest
     public function rules(): array
     {
         return [
-          'registerDate' => 'required|string',
-          'period' => 'required|integer',
+            'registerDate' => 'required|string',
+            'period' => 'required|integer',
         ];
     }
 }

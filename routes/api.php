@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\LectureController;
 use App\Http\Controllers\LoginController;
+use App\Http\Controllers\StudentController;
 use App\Http\Controllers\UlmsController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -17,17 +18,25 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
-    return $request->user();
-});
 
 Route::post('/login', [LoginController::class, 'login']);
-Route::middleware('auth:sanctum')->post('/logout', [LoginController::class, 'logout']);
-Route::middleware('auth:sanctum')->get('/index', [LoginController::class, 'index'])->name('login');
 
-Route::get('/lectureList', [LectureController::class, 'getLectureList']);
+Route::middleware('auth:api')->group(function () {
+    Route::post('/logout', [LoginController::class, 'logout']);
 
-Route::get('/student/{student_id}/lecture', [LectureController::class, 'getStudentLectureList']);
+    Route::get('/student', [StudentController::class, 'show']);
 
-Route::post('/student/{student_id}/lecture/{lecture_id}', [LectureController::class, 'registerStudentLecture']);
-Route::delete('/studentLecture/{student_lecture_id}', [LectureController::class, 'removeStudentLecture']);
+    Route::get('/lectureList', [LectureController::class, 'getLectureList']);
+
+    // 生徒の履修状況を取得する
+    Route::get('/lectureAggregation', [LectureController::class, 'getStudentLectureAggregation']);
+
+    Route::get('/lecture', [LectureController::class, 'getStudentLectureList']);
+
+    Route::post('/lecture/{lecture_id}', [LectureController::class, 'registerStudentLecture']);
+    Route::post('/lecture/{lecture_id}/bulk', [LectureController::class, 'registerStudentLectureBulk']);
+
+    Route::delete('/studentLecture/{student_lecture_id}', [LectureController::class, 'removeStudentLecture']);
+
+    Route::post('/changePassword', [LoginController::class, 'changePassword']);
+});

@@ -4,6 +4,7 @@ namespace App\Models;
 
 use App\Domain\Entities\LectureEntity;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Lecture extends Model
@@ -34,6 +35,11 @@ class Lecture extends Model
         'sat_period',
         'sun_period',
     ];
+
+    public function studentLectures(): HasMany
+    {
+        return $this->hasMany(StudentLecture::class);
+    }
 
     public function toEntity(): LectureEntity
     {

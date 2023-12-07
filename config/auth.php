@@ -14,8 +14,8 @@ return [
     */
 
     'defaults' => [
-        'guard' => 'student',
-        'passwords' => 'student',
+        'guard' => 'api',
+        // 'passwords' => 'student',
     ],
 
     /*
@@ -36,8 +36,8 @@ return [
     */
 
     'guards' => [
-        'student' => [
-            'driver' => 'session',
+        'api' => [
+            'driver' => 'jwt',
             'provider' => 'student',
         ],
     ],
@@ -90,14 +90,14 @@ return [
     |
     */
 
-    'passwords' => [
-        'student' => [
-            'provider' => 'student',
-            'table' => 'password_reset_tokens',
-            'expire' => 60,
-            'throttle' => 60,
-        ],
-    ],
+    // 'passwords' => [
+    //     'student' => [
+    //         'provider' => 'student',
+    //         'table' => 'password_reset_tokens',
+    //         'expire' => 60,
+    //         'throttle' => 60,
+    //     ],
+    // ],
 
     /*
     |--------------------------------------------------------------------------

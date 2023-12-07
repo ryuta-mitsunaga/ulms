@@ -6,7 +6,7 @@ class LectureEntity
 {
     public function __construct(
         private int $id,
-        private string $lecture_type,
+        private int $lecture_type,
         private string $title,
         private string $description,
         private array $mon_period,
@@ -23,7 +23,7 @@ class LectureEntity
         return $this->id;
     }
 
-    public function getLectureType(): string
+    public function getLectureType(): int
     {
         return $this->lecture_type;
     }

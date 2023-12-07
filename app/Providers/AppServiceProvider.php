@@ -4,8 +4,10 @@ namespace App\Providers;
 
 use App\Domain\Repositories\LectureRepositoryInterface;
 use App\Domain\Repositories\StudentLectureRepositoryInterface;
+use App\Domain\Repositories\StudentRepositoryInterface;
 use App\Infrastructure\Repositories\LectureRepository;
 use App\Infrastructure\Repositories\StudentLectureRepository;
+use App\Infrastructure\Repositories\StudentRepository;
 use Illuminate\Support\ServiceProvider;
 use Laravel\Sanctum\Sanctum;
 
@@ -23,6 +25,10 @@ class AppServiceProvider extends ServiceProvider
         $this->app->bind(
             StudentLectureRepositoryInterface::class,
             StudentLectureRepository::class,
+        );
+        $this->app->bind(
+            StudentRepositoryInterface::class,
+            StudentRepository::class,
         );
     }
 

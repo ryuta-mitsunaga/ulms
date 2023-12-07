@@ -14,8 +14,9 @@ return new class () extends Migration {
             $table->id();
             $table->foreignId('student_id');
             $table->foreignId('lecture_id');
-            $table->date('register_date');
-            $table->integer('period');
+            $table->date('register_date')->nullable();
+            $table->integer('period')->nullable();
+            $table->integer('term_type')->nullable()->comment('前期: 1, 後期: 2');
 
             $table->timestamps();
             $table->softDeletes();

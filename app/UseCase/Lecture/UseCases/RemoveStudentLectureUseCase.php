@@ -2,16 +2,10 @@
 
 namespace App\UseCase\Lecture\UseCases;
 
-use App\Domain\Entities\LectureEntity;
 use App\Domain\Repositories\StudentLectureRepositoryInterface;
-use App\Http\Requests\RegisterStudentLectureRequest;
-use App\Models\Student;
-use Carbon\Carbon;
-use Illuminate\Auth\AuthManager;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Routing\Controller as BaseController;
 use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Facades\Log;
 
 class RemoveStudentLectureUseCase extends BaseController
 {
