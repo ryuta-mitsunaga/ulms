@@ -8,6 +8,7 @@ use App\Domain\Repositories\StudentRepositoryInterface;
 use App\Infrastructure\Repositories\LectureRepository;
 use App\Infrastructure\Repositories\StudentLectureRepository;
 use App\Infrastructure\Repositories\StudentRepository;
+use Illuminate\Support\Facades\URL;
 use Illuminate\Support\ServiceProvider;
 use Laravel\Sanctum\Sanctum;
 
@@ -37,7 +38,7 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
-        Sanctum::usePersonalAccessTokenModel(PersonalAccessToken::class);
+        URL::forceScheme('https');
     }
 
 }
